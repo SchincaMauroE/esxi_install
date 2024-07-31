@@ -1,0 +1,4 @@
+---
+username: "Example_username"
+password: "Example_password"
+baseuri: "https://example.com/redfish/v1"
