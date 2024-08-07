@@ -26,22 +26,3 @@
     username: "{{ username }}"
     password: "{{ password }}"
     timeout: 20
-
-- name: Wait for host ready response
-  community.vmware.vmware_host_facts:
-    hostname: "{{ esxi_server }}"
-    username: "{{ esxi_username }}"
-    password: "{{ esxi_password }}"
-    validate_certs: no
-    schema: vsphere
-    properties:
-      - overallStatus
-      - config.network.ipV6Enabled
-  delegate_to: localhost
-  register: result
-  retries: 20
-  delay: 60
-  until:
-    - result is succeeded
-    - result.ansible_facts.config.network.ipV6Enabled == false
-    - result.ansible_facts.overallStatus == 'green'
